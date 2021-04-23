@@ -1,0 +1,20 @@
+
+<form name="user_form" method="POST">
+    <div class="mb-3">
+      <label for="first_name" class="form-label">Nombre</label>
+      <input type="text" name="first_name" class="form-control" id="first_name">
+      <label for="last_name" class="form-label">Apellido</label>
+      <input type="text" name="last_name" class="form-control" id="last_name">
+      <label for="email" class="form-label">Email</label>
+      <input type="text" name="email" class="form-control" id="email">
+      <label for="phone" class="form-label">Teléfono</label>
+      <input type="text" name="phone" class="form-control" id="phone">
+    </div>
+    <button type="button" class="btn btn-info" onclick="history.back(-1)" > Regresar</button>
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+</form>
+<script>
+  function actionURL(){
+    document.user_form.action = "/clients/update/" + <% id %>;
+  }
+</script>
