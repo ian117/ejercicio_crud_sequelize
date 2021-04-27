@@ -51,17 +51,31 @@ app.get("/clients/update/:id", (req, res) => {
     res.render('clients_update',{id: req.params.id})
 })
 
+//Use this to validate the object below
+
+// export const getSearchTerm = () => {
+//     const rawSearchTerm = document.getElementById("search").value.trim();
+//     const regex = /[ ]{2,}/gi;
+//     const searchTerm = rawSearchTerm.replaceAll(regex, " ");
+//     return searchTerm;
+//   };
+
 app.post("/clients/update/:id", async (req, res) => {
     let idAux = req.params.id;
     const obj = JSON.parse(JSON.stringify(req.body));
-    let objectToUpdate = {}
+    let objectToUpdate = {};
+    const regex = /[ ]{2,}/gi;
+
     
     for (let field in obj) {
+        obj[field] = obj[field].trim();
+        const newString = obj[field].replace(regex, " "); 
+        obj[field] = newString;
         if (obj[field] !== ''){
             objectToUpdate[field] = obj[field]
         }
     }
-    
+
     try {
         let results = await clients_second.update(objectToUpdate, {where: {id: idAux}})
         res.send('ok')
